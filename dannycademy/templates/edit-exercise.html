@@ -1,0 +1,117 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<!-- Hero Start-->
+<div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center ">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="hero-cap text-center pt-50">
+                    <h2>Edit "{{exercise.title}}"</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Hero End -->
+
+
+<!--<body onload="myFunction();">-->
+
+<!--</body>-->
+
+<div class="whole-wrap">
+    <div class="container box_1170">
+        <div class="section-top-border">
+
+                <form method="POST" action="" enctype="multipart/form-data">
+
+                    {{ form.hidden_tag() }}
+                    {{ form.csrf_token }}
+
+
+                    <fieldset class="form-group">
+                        <div class="form-group">
+                            {{form.title.label(class="form-control-label") }}
+
+                            {% if form.title.errors %}
+                            {{ form.title(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.title.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{form.title(class="form-control form-control-lg") }}
+
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{form.content.label(class="form-control-label") }}
+
+                            {% if form.content.errors %}
+                            {{ form.content(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.content.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{form.content(class="form-control form-control-lg") }}
+
+                            {% endif %}
+                        </div>
+
+                    </fieldset>
+                    <pre class="col-6" id="editor" style="height: 70vh">{{form.checker.data}}</pre>
+                    <div id="myContainer">&nbsp;</div>
+                    <!--                    <div class="form-group">-->
+<!--                        <label for="checker"></label>-->
+<!--                        <input class="form-control form-control-lg" id="checker" name="checker" required type="text" value="{{form.checker.data}}">-->
+<!--                    </div>-->
+                    <div class="form-group">
+<!--                        {{ form.submit(class="genric-btn primary")  }}-->
+                        <input class="genric-btn primary" id="submit" name="submit" type="submit" value="Update" onclick="yay()">
+
+                    </div>
+                </form>
+            <br>
+
+            <br>
+        </div>
+    </div>
+</div>
+
+
+<script src="src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/dracula");
+    editor.session.setMode("ace/mode/python");
+    //editor.setKeyboardHandler("ace/keyboard/vim");
+    editor.setOptions({
+        //fontFamily: "tahoma"
+        fontSize: "16pt"
+    });
+    /*
+    var code = editor.getValue();
+    console.log(code)
+     */
+
+
+            function yay() {
+
+
+                let editorValue = encodeURIComponent(editor.getValue());
+            console.log(editorValue)
+            $( "#myContainer" ).append( "                           <label class=\"form-control-label\" for=\"checker\">Checker</label>\n" +
+                "\n" +
+                "                            \n" +
+                "                            <input class=\"form-control form-control-lg\" id=\"checker\" name=\"checker\" value=\""+editorValue+"\">\n" );
+        }
+
+
+</script>
+
+{% endblock content %}

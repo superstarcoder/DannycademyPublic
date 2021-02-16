@@ -1,0 +1,109 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<!-- Hero Start-->
+<div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center ">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="hero-cap text-center pt-50">
+                    <h2>{{course.title}}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Hero End -->
+
+
+<body onload="scrollToTargetAdjusted()">
+
+</body>
+
+<script>
+    function redirect(){
+        document.getElementById('myHead').scrollIntoView();
+        // var objDiv = document.getElementById("profileDiv");
+        // objDiv.scrollTop = objDiv.scrollHeight;
+    }
+    function scrollToTargetAdjusted(){
+
+
+
+        var element = document.getElementById('scrollHere');
+        var headerOffset = 100;
+        var elementPosition = element.getBoundingClientRect().top;
+        var offsetPosition = elementPosition - headerOffset;
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+        });
+    }
+</script>
+
+<div class="popular-location section-padding30" id="scrollHere">
+    <div class="container">
+<!--        <div class="alert alert-warning alert-dismissible fade show" role="alert">-->
+<!--            <strong>Note!</strong> This course is still work in progress-->
+<!--            <button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+<!--                <span aria-hidden="true">&times;</span>-->
+<!--            </button>-->
+<!--        </div>-->
+        <div class="row">
+            <div class="col-6">
+                <div class="align-content-center">
+                    <h1>{{course.title}}</h1>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="align-content-center">
+                    <h2>Chapters</h2>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-6">
+                <div class="single-location">
+                    <div class="location-img">
+                        <img src="{{image_path}}/{{course.thumbnail}}" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="list-group">
+
+                    {% for item in items %}
+                        {% if isinstance(item, Chapter) and item.published %}
+                            <a href="viewChapter?courseId={{course.id}}&chapterId={{item.id}}" class="list-group-item list-group-item-action list-group-item-primary">{{item.title}}</a>
+                        {% elif isinstance(item, Exercise) and item.published %}
+                            <a href="viewExercise?courseId={{course.id}}&exerciseId={{item.id}}" class="list-group-item list-group-item-action list-group-item-dark">{{item.title}}</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <!--                use this for normal:-->
+            <!--                <a href="#" class="list-group-item list-group-item-action list-group-item-primary">Chapter 2: Introduction to Data Types</a>-->
+            <!--                use this for incomplete assignment:-->
+            <!--                <a href="#" class="list-group-item list-group-item-action list-group-item-dark">A simple dark list group item</a>-->
+            <!--                use this for complete assignments:-->
+            <!--                <a href="#" class="list-group-item list-group-item-action list-group-item-success">A simple success list group item</a>-->
+
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+    </div>
+
+        <br>
+</div>
+
+
+
+{% endblock content %}

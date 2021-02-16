@@ -1,0 +1,105 @@
+<header id="myNavbar">
+    <!-- Header Start -->
+    <div class="header-area header-transparent">
+        <div class="main-header">
+            <div class="header-bottom  header-sticky">
+                <div class="container-fluid">
+
+                    <div class="row align-items-center">
+                        <!-- Logo -->
+                        <div class="col-xl-2 col-lg-2 col-md-1">
+                            <div class="logo">
+                                <a href="/"><img src="assets/img/logo/logo.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-xl-10 col-lg-10 col-md-8">
+                            <!-- Main-menu -->
+                            <div class="main-menu f-right d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation">
+                                        <li><a href="{{ url_for('main.index') }}">Home</a></li>
+<!--                                        <li><a href="{{ url_for('main.about') }}">About</a></li>-->
+                                        <li><a href="{{ url_for('main.courses') }}">Courses</a></li>
+                                        <li><a target="_blank"  href="https://discord.gg/KAJEd4H2">Community</a></li>
+                                        <li><a href="{{ url_for('main.codeEditor')}}">Online Editor</a></li>
+<!--                                        <li><a href="#">Page</a>-->
+<!--                                            <ul class="submenu">-->
+<!--                                                <li><a href="blog.html">Blog</a></li>-->
+<!--                                                <li><a href="blog_details.html">Blog Details</a></li>-->
+<!--                                                <li><a href="elements.html">Element</a></li>-->
+<!--                                                <li><a href="listing_details.html">Listing details</a></li>-->
+<!--                                            </ul>-->
+<!--                                        </li>-->
+                                        <li><a href="contact.html">Support</a></li>
+                                        <li class="add-list"><a href="/addCourse"><i class="ti-plus"></i> add a Course</a></li>
+
+
+                                        {% if current_user.is_authenticated %}
+                                            <li><a href="{{ url_for('users.account') }}"> <i class="ti-user"></i> Account</a>
+                                                <ul class="submenu">
+                                                    <li><a href="{{ url_for('users.account') }}">Settings</a></li>
+                                                    <li><a href="blog_details.html">My Courses</a></li>
+                                                    <li><a href="elements.html">My Achievements</a></li>
+                                                </ul>
+                                            </li>
+
+                                        {% if current_user.role == "teacher" %}
+                                            <li><a href="{{ url_for('main.teach') }}">Teach</a></li>
+                                        {% endif %}
+
+
+
+                                        <li><a href="{{ url_for('users.logout') }}">Logout</a></li>
+
+                                        {% else %}
+                                            <li class="login"><a href="{{ url_for('users.login') }}">
+                                                <i class="ti-user"></i> Sign in </a>
+                                            </li>
+
+                                            <li class="login"><a href="{{ url_for('users.signUp') }}">
+                                                <i class="ti-user"></i> Register</a>
+                                            </li>
+                                        {% endif %}
+
+
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <!-- Mobile Menu -->
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+
+
+
+
+                    {% with messages = get_flashed_messages(with_categories=True)  %}
+                    {% if messages %}
+                    {% for category, message in messages %}
+
+                    <!--            <div class="alert alert&#45;&#45;{{ category }}">-->
+                    <!--                {{ message }}-->
+                    <!--            </div>-->
+
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+</header>

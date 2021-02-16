@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<!-- Hero Start-->
+<div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center ">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="hero-cap text-center pt-50">
+                    <h2>Edit "{{chapter.title}}"</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Hero End -->
+
+
+<script>
+
+    function setUpFrame() {
+        var frame = window.frames['myIframe'];
+        console.log('sending {{chapter.content}}')
+        frame.sendContent('{{chapter.content}}');
+    }
+    function saveContent(markup) {
+        window.location.href = '/saveContent?courseId={{course.id}}&chapterId={{chapter.id}}&content='+markup;
+    }
+</script>
+
+
+<div class="whole-wrap">
+    <div class="container box_1170">
+        <div class="section-top-border">
+            <div class="row">
+
+                <form method="POST" action="" enctype="multipart/form-data">
+
+                    {{ form.hidden_tag() }}
+                    {{ form.csrf_token }}
+
+
+                    <fieldset class="form-group">
+                        <div class="form-group">
+                            {{form.title.label(class="form-control-label") }}
+
+                            {% if form.title.errors %}
+                            {{ form.title(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.title.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{form.title(class="form-control form-control-lg") }}
+
+                            {% endif %}
+
+
+                        </div>
+                    </fieldset>
+                    <div class="form-group ">
+                        {{ form.submit(class="genric-btn primary")  }}
+                    </div>
+                </form>
+
+
+
+            </div>
+            <br>
+            <div class="row">
+                <a type="button" class="genric-btn success small" href="/edit?courseId={{course.id}}">Course Page</a>
+                <a type="button" class="genric-btn primary small" href="/viewChapter?courseId={{course.id}}&chapterId={{chapter.id}}">View</a>
+                {% if chapter.published == True %}
+                    <a type="button" class="genric-btn info small" href="/publishChapter?courseId={{course.id}}&chapterId={{chapter.id}}&action=unpublish">Unpublish</a>
+                {% else %}
+                    <a type="button" class="genric-btn info small" href="/publishChapter?courseId={{course.id}}&chapterId={{chapter.id}}&action=publish">Publish</a>
+                {% endif %}
+                <a type="button" class="genric-btn danger small" href="/deleteChapter?courseId={{course.id}}&chapterId={{chapter.id}}">Delete</a>
+                <!--return redirect(f"/editChapter?courseId={id}&chapterId={str(myChapter.query.all()[-1].id)}")  # get request -->
+
+            </div>
+            <br>
+            <div class="row">
+                <iframe src="Components/summernoteTest.html"  name="myIframe" width="900"  height="800" style="border: none;"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

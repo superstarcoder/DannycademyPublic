@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+<!-- Hero Start-->
+<div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center ">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="hero-cap text-center pt-50">
+                    <h2>Reset Password</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Hero End -->
+
+<div class="whole-wrap">
+    <div class="container box_1170">
+        <div class="section-top-border">
+            <div class="row">
+                <div class="col-lg-8 col-md-8">
+                    <h3 class="mb-30">Welcome back! Log In</h3>
+
+                    <form method="POST" action="">
+
+                        {{ form.hidden_tag() }}
+                        {{ form.csrf_token }}
+
+
+                        <fieldset class="form-group">
+
+                            <div class="form-group">
+                                {{form.email.label(class="form-control-label") }}
+
+
+                                {% if form.email.errors %}
+                                {{ form.email(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.email.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                {{form.email(class="form-control form-control-lg") }}
+
+                                {% endif %}
+                            </div>
+                        </fieldset>
+                        <div class="form-group">
+                            {{ form.submit(class="btn btn-outline-info")  }}
+                        </div>
+
+<!--                        <small class="text-muted ml-2">-->
+<!--                        </small>-->
+
+                    </form>
+                    <div class="border-top pt-3">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

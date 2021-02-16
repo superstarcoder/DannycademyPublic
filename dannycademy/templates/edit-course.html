@@ -1,0 +1,188 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<!-- Hero Start-->
+<div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center ">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="hero-cap text-center pt-50">
+                    <h2>Edit "{{course.title}}"</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Hero End -->
+
+
+<body onload="scrollToTargetAdjusted()">
+
+</body>
+
+<script>
+    function redirect(){
+        document.getElementById('myHead').scrollIntoView();
+        // var objDiv = document.getElementById("profileDiv");
+        // objDiv.scrollTop = objDiv.scrollHeight;
+    }
+    function scrollToTargetAdjusted(){
+
+
+
+        var element = document.getElementById('scrollHere');
+        var headerOffset = 100;
+        var elementPosition = element.getBoundingClientRect().top;
+        var offsetPosition = elementPosition - headerOffset;
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+        });
+    }
+</script>
+
+<div class="popular-location section-padding30" >
+    <div class="container">
+        <div class="row" id="scrollHere">
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="single-location mb-30">
+                    <div class="location-img">
+                        <img src="{{image_path}}/{{course.thumbnail}}" alt="">
+                    </div>
+                    <div class="location-details">
+                        <p>{{course.title}}</p>
+                        <a href="/teach" class="location-btn">your courses</a>
+                        <a href="/viewCourse?courseId={{course.id}}" class="location-btn">view</a>
+                        {% if course.published == True %}
+                        <a href="/publishCourse?courseId={{course.id}}&action=unpublish" class="location-btn">unpublish</a>
+                        {% else %}
+                        <a href="/publishCourse?courseId={{course.id}}&action=publish" class="location-btn">publish</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <form method="POST" action="" enctype="multipart/form-data">
+
+                {{ form.hidden_tag() }}
+                {{ form.csrf_token }}
+
+
+                <fieldset class="form-group">
+                    <div class="form-group">
+                        {{form.title.label(class="form-control-label") }}
+
+                        {% if form.title.errors %}
+                        {{ form.title(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.title.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{form.title(class="form-control form-control-lg") }}
+
+                        {% endif %}
+
+
+                    </div>
+
+                    <div class="form-group">
+                        {{form.thumbnail.label()}}
+                        {{form.thumbnail(class="form-control-file")}}
+                        {% if form.thumbnail.errors %}
+                        {% for error in form.thumbnail.errors %}
+                        <span class="text-danger">{{ error }}</span><br>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+
+
+                </fieldset>
+                <div class="form-group text-center">
+                    {{ form.submit(class="genric-btn primary radius")  }}
+                </div>
+                <div class="text-center">
+                    <a href="/deleteCourse?courseId={{course.id}}" class="genric-btn danger radiu radiuss">Delete Course</a>
+                </div>
+            </form>
+            <div class="border-top pt-3">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <h2>Chapters & Exercises</h2>
+        </div>
+
+        <br>
+
+
+        {% for item in items %}
+            {% if isinstance(item, Chapter) %}
+                <div class="row col-8">
+                    <a class="list-group-item list-group-item-action list-group-item-primary">{{item.title}}</a>
+                </div>
+                <div class="row col-8">
+                    <div class="container box_1170 border-top-generic text-center">
+                        <div class="button-group-area">
+
+                        <a type="button" class="genric-btn info small ti-arrow-down radius" href="/moveChapter?courseId={{course.id}}&chapterId={{item.id}}&action=down"></a>
+                        <a type="button" class="genric-btn success small radius" href="/editChapter?courseId={{course.id}}&chapterId={{item.id}}">Edit</a>
+                        <a type="button" class="genric-btn primary small radius" href="/viewChapter?courseId={{course.id}}&chapterId={{item.id}}">View</a>
+                        {% if item.published == True %}
+                            <a type="button" class="genric-btn info small radius" href="/publishChapter?courseId={{course.id}}&chapterId={{item.id}}&action=unpublish">Unpublish</a>
+                        {% else %}
+                            <a type="button" class="genric-btn info small radius" href="/publishChapter?courseId={{course.id}}&chapterId={{item.id}}&action=publish">Publish</a>
+                        {% endif %}
+                        <a type="button" class="genric-btn danger small radius" href="/deleteChapter?courseId={{course.id}}&chapterId={{item.id}}">Delete</a>
+                        <a type="button" class="genric-btn info small ti-arrow-up radius" href="/moveChapter?courseId={{course.id}}&chapterId={{item.id}}&action=up"></a>
+                        <!--return redirect(f"/editChapter?courseId={id}&chapterId={str(myChapter.query.all()[-1].id)}")  # get request -->
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+
+            {% elif isinstance(item, Exercise) %}
+
+                <div class="row col-8">
+                    <a class="list-group-item list-group-item-action list-group-item-dark">{{item.title}}</a>
+                </div>
+                <div class="row col-8">
+                    <div class="container box_1170 border-top-generic text-center">
+                        <div class="button-group-area">
+
+                            <a type="button" class="genric-btn info small ti-arrow-down radius" href="/moveExercise?courseId={{course.id}}&exerciseId={{item.id}}&action=down"></a>
+                            <a type="button" class="genric-btn success small radius" href="/editExercise?courseId={{course.id}}&exerciseId={{item.id}}">Edit</a>
+                            <a type="button" class="genric-btn primary small radius" >View</a>
+                            {% if item.published == True %}
+                            <a type="button" class="genric-btn info small radius" href="/publishExercise?courseId={{course.id}}&exerciseId={{item.id}}&action=unpublish">Unpublish</a>
+                            {% else %}
+                            <a type="button" class="genric-btn info small radius" href="/publishExercise?courseId={{course.id}}&exerciseId={{item.id}}&action=publish">Publish</a>
+                            {% endif %}
+                            <a type="button" class="genric-btn danger small radius" href="/deleteExercise?courseId={{course.id}}&exerciseId={{item.id}}">Delete</a>
+                            <a type="button" class="genric-btn info small ti-arrow-up radius" href="/moveExercise?courseId={{course.id}}&exerciseId={{item.id}}&action=up"></a>
+                            <!--return redirect(f"/editChapter?courseId={id}&chapterId={str(myChapter.query.all()[-1].id)}")  # get request -->
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+
+            {% endif %}
+        {% endfor %}
+        <div class="row col-8">
+                <div class="container box_1170 border-top-generic text-center">
+                    <div class="button-group-area">
+                        <a type="button" class="genric-btn primary radius" href="/addChapter?courseId={{course.id}}">Add Chapter</a>
+                        <a type="button" class="genric-btn info radius" href="/addExercise?courseId={{course.id}}">Add Exercise</a>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

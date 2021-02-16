@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+
+<div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="hero-cap text-center pt-50" id="myHead">
+                    <h2>Your Courses</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Hero End -->
+<body onload="scrollToTargetAdjusted()">
+
+</body>
+
+<script>
+    function redirect(){
+        document.getElementById('myHead').scrollIntoView();
+        // var objDiv = document.getElementById("profileDiv");
+        // objDiv.scrollTop = objDiv.scrollHeight;
+    }
+    function scrollToTargetAdjusted(){
+
+
+
+        var element = document.getElementById('scrollHere');
+        var headerOffset = 100;
+        var elementPosition = element.getBoundingClientRect().top;
+        var offsetPosition = elementPosition - headerOffset;
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+        });
+    }
+</script>
+
+<div class="popular-location section-padding30" id="scrollHere">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Section Tittle -->
+                <div class="section-tittle text-center mb-80">
+                    <span>explore your interests</span>
+                    <h2>Your Courses</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for course in Courses %}
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="single-location mb-30">
+                    <div class="location-img">
+                        <img src="{{image_path}}/{{course.thumbnail}}" alt="">
+                    </div>
+                    <div class="location-details">
+                        <p>{{course.title}}</p>
+                        <a href="edit?courseId={{course.id}}" class="location-btn">edit</a>
+                        <a href="/viewCourse?courseId={{course.id}}" class="location-btn">view</a>
+                        {% if course.published == True %}
+                            <a href="/publishCourse?courseId={{course.id}}&action=unpublish" class="location-btn">unpublish</a>
+                        {% else %}
+                            <a href="/publishCourse?courseId={{course.id}}&action=publish" class="location-btn">publish</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="single-location mb-30">
+                    <div class="location-img">
+                        <img src="{{image_path}}/missing.jpg" alt="">
+                    </div>
+                    <div class="location-details">
+                        <p></p>
+                        <a href="/addCourse" class="location-btn">add a course</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

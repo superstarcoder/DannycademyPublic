@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<!-- Hero Start-->
+<div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center ">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="hero-cap text-center pt-50">
+                    <h2>Are you sure you want to delete "{{course.title}}"?</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Hero End -->
+
+<div class="popular-location section-padding30" id="scrollHere">
+    <div class="container">
+            <div class="row">
+                <form method="POST" action="" enctype="multipart/form-data">
+
+                    <div class="text-center">
+                        <input type="submit" class="genric-btn danger" value="confirm delete">
+                    </div>
+
+                </form>
+                <div class="border-top pt-3">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

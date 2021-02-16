@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<main>
+
+
+    <!-- Hero Area Start-->
+    <div class="slider-area hero-overly">
+        <div class="single-slider hero-overly  slider-height d-flex align-items-center">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-8 col-lg-9">
+                        <!-- Hero Caption -->
+                        <div class="hero__caption">
+                            <span>learn to code the smart way</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-xl-12 col-lg-9">
+                        <img src="assets/img/logo/logo.png" class="img-responsive rounded mx-auto d-block" alt="" style="width: 50%">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--Hero Area End-->
+
+    <img src="/assets/img/hero/howItWorks.png" class="mx-auto d-block img-fluid" alt="">
+    <img src="/assets/img/hero/howItWorks2.png" class="mx-auto d-block img-fluid" alt="">
+
+
+
+    <!-- Courses Area Start -->
+    {% include 'Components/courses.html' %}
+    <!-- Courses Area End -->
+
+
+    <!-- Subscribe Area Start -->
+    {% include 'Components/subscribe.html' %}
+    <!-- Subscribe Area End -->
+</main>
+{% endblock content %}

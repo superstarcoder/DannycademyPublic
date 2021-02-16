@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<!-- Hero Start-->
+<div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center ">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="hero-cap text-center pt-50">
+                    <h2>{{course.title}}- {{chapter.title}}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Hero End -->
+
+
+<!--<body onload="myFunction();">-->
+
+<!--</body>-->
+
+<script>
+    // function scrollToTargetAdjusted(){
+    //
+    //
+    //
+    //     var element = document.getElementById('scrollHere');
+    //     var headerOffset = 100;
+    //     var elementPosition = element.getBoundingClientRect().top;
+    //     var offsetPosition = elementPosition - headerOffset;
+    //
+    //     window.scrollTo({
+    //         top: offsetPosition,
+    //         behavior: "smooth"
+    //     });
+    // }
+    function setUpFrame() {
+        var frame = window.frames['myIframe'];
+        console.log('sending {{chapter.content}}')
+        frame.sendContent('{{chapter.content}}');
+    }
+    function saveContent(markup) {
+        window.location.href = '/saveContent?courseId={{course.id}}&chapterId={{chapter.id}}&content='+markup;
+    }
+</script>
+
+
+<div class="whole-wrap">
+    <div class="container box_1170">
+        <div class="section-top-border">
+            <div class="row">
+                <iframe src="Components/summernoteView.html"  name="myIframe" width="900"  height="800vh" style="border: none;"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

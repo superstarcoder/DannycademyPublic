@@ -1,0 +1,162 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="hero-cap text-center pt-50" id="myHead">
+                                        <h2>{{ current_user.username }}'s profile</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Hero End -->
+<body onload="scrollToTargetAdjusted()">
+
+</body>
+
+<script>
+    function redirect(){
+        document.getElementById('myHead').scrollIntoView();
+        // var objDiv = document.getElementById("profileDiv");
+        // objDiv.scrollTop = objDiv.scrollHeight;
+    }
+    function scrollToTargetAdjusted(){
+
+
+
+        var element = document.getElementById('profileDiv');
+        var headerOffset = 100;
+        var elementPosition = element.getBoundingClientRect().top;
+        var offsetPosition = elementPosition - headerOffset;
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+        });
+    }
+</script>
+
+
+
+<div class="whole-wrap top-buffer-30" id="profileDiv">
+    <div class="container box_1170">
+        <div class="content-section">
+            <div class="media">
+                <img class="rounded-circle account-img" width="155" src="{{ image_path }}" style="margin-right: 15px">
+                <div class="media-body">
+                    <h2 class="account-heading">
+                        {{current_user.username}}
+                    </h2>
+
+                    <p class="text-secondary">
+                        {{ current_user.email }}
+                    </p>
+                    <div class="border-top pt-3">
+                    </div>
+                    <h1 class="text-heading">
+                        {{ current_user.role }}
+                    </h1>
+
+                </div>
+
+            </div>
+
+            <!-- form here -->
+
+            <div class="section-top-border">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8">
+                        <h3 class="mb-30">Account Info</h3>
+
+                        <!-- put the encoding type thing pls whenever u have a file upload in ur form-->
+                        <form method="POST" action="" enctype="multipart/form-data">
+
+                            {{ form.hidden_tag() }}
+                            {{ form.csrf_token }}
+
+
+                            <fieldset class="form-group">
+                                <div class="form-group">
+                                    {{form.username.label(class="form-control-label") }}
+
+                                    {% if form.username.errors %}
+                                    {{ form.username(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.username.errors %}
+                                        <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                    {% else %}
+                                    {{form.username(class="form-control form-control-lg") }}
+
+                                    {% endif %}
+
+
+                                </div>
+                                <div class="form-group">
+                                    {{form.email.label(class="form-control-label") }}
+
+
+                                    {% if form.email.errors %}
+                                    {{ form.email(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.email.errors %}
+                                        <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                    {% else %}
+                                    {{form.email(class="form-control form-control-lg") }}
+
+                                    {% endif %}
+                                </div>
+
+                                <div class="form-group">
+                                    {{form.picture.label()}}
+                                    {{form.picture(class="form-control-file")}}
+                                    {% if form.picture.errors %}
+                                        {% for error in form.picture.errors %}
+                                    <span class="text-danger">{{ error }}</span><br>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+
+
+                            </fieldset>
+                            <div class="form-group text-center">
+                                {{ form.submit(class="genric-btn primary")  }}
+                            </div>
+
+
+
+
+                        </form>
+                        <div class="border-top pt-3">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end form here -->
+        </div>
+    </div>
+</div>
+
+
+<style>
+    img.rounded-circle {
+        object-fit: cover;
+        border-radius: 50%;
+        height: 150px;
+        width: 150px;
+    }
+    .top-buffer-20 { margin-top:20px; }
+    .top-buffer-30 { margin-top:30px; }
+    .top-buffer-40 { margin-top:40px; }
+</style>
+
+
+{% endblock content %}

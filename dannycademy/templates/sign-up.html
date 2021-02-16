@@ -1,0 +1,120 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+<!-- Hero Start-->
+<div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center ">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="hero-cap text-center pt-50">
+                    <h2>Sign Up</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Hero End -->
+
+<div class="whole-wrap">
+    <div class="container box_1170">
+        <div class="section-top-border">
+            <div class="row">
+                <div class="col-lg-8 col-md-8">
+                    <h3 class="mb-30">Sign Up Today!</h3>
+
+                    <form method="POST" action="">
+
+                        {{ form.hidden_tag() }}
+                        {{ form.csrf_token }}
+
+
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                {{form.username.label(class="form-control-label") }}
+
+                                {% if form.username.errors %}
+                                    {{ form.username(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.username.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{form.username(class="form-control form-control-lg") }}
+
+                                {% endif %}
+
+
+                            </div>
+                            <div class="form-group">
+                                {{form.email.label(class="form-control-label") }}
+
+
+                                {% if form.email.errors %}
+                                {{ form.email(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.email.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                {{form.email(class="form-control form-control-lg") }}
+
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                {{form.password.label(class="form-control-label") }}
+
+
+                                {% if form.password.errors %}
+                                {{ form.password(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.password.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                {{form.password(class="form-control form-control-lg") }}
+
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                {{form.confirm_password.label(class="form-control-label") }}
+
+
+                                {% if form.confirm_password.errors %}
+                                {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.confirm_password.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                {{form.confirm_password(class="form-control form-control-lg") }}
+
+                                {% endif %}
+                            </div>
+
+                        </fieldset>
+                        <div class="form-group">
+                            {{ form.submit(class="btn btn-outline-info")  }}
+                        </div>
+
+
+
+
+                    </form>
+                    <div class="border-top pt-3">
+                        <small class="text-muted">
+                            Already Have An Account? <a class="ml-2" href="{{ url_for('users.login') }}" style="color:#0000ff"> Sign In </a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,111 @@
+<!-- Popular Locations Start -->
+<div class="popular-location section-padding30" style="background: black">
+    <div class="container" >
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Section Tittle -->
+                <div class="section-tittle text-center mb-80">
+                    <span>explore your interests</span>
+                    <h2 style="color: white">Available Courses</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for course in Course.query.filter_by(published=True) %}
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-location mb-30">
+                        <div class="location-img">
+                            <img src="{{image_path}}/{{course.thumbnail}}" alt="">
+                        </div>
+                        <div class="location-details">
+                            <p>{{course.title}}</p>
+                            <a href="/viewCourse?courseId={{course.id}}" class="location-btn">Learn Now for Free!</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <!--        <div class="row">-->
+<!--            <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                <div class="single-location mb-30">-->
+<!--                    <div class="location-img">-->
+<!--                        <img src="assets/img/courses/default.jpg" alt="">-->
+<!--                    </div>-->
+<!--                    <div class="location-details">-->
+<!--                        <p>Python for Beginners</p>-->
+<!--                        <a href="#" class="location-btn">Learn Now for Free!</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                <div class="single-location mb-30">-->
+<!--                    <div class="location-img">-->
+<!--                        <img src="assets/img/gallery/location2.png" alt="">-->
+<!--                    </div>-->
+<!--                    <div class="location-details">-->
+<!--                        <p>Python for Pros</p>-->
+<!--                        <a href="#" class="location-btn">Learn Now for Free!</a>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                <div class="single-location mb-30">-->
+<!--                    <div class="location-img">-->
+<!--                        <img src="assets/img/gallery/location3.png" alt="">-->
+<!--                    </div>-->
+<!--                    <div class="location-details">-->
+<!--                        <p>Game Design with Python Pygame</p>-->
+<!--                        <a href="#" class="location-btn">Learn Now for Free!</a>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                <div class="single-location mb-30">-->
+<!--                    <div class="location-img">-->
+<!--                        <img src="assets/img/gallery/location4.png" alt="">-->
+<!--                    </div>-->
+<!--                    <div class="location-details">-->
+<!--                        <p>Web design with Python Flask</p>-->
+<!--                        <a href="#" class="location-btn">Learn Now for Free!</a>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                <div class="single-location mb-30">-->
+<!--                    <div class="location-img">-->
+<!--                        <img src="assets/img/gallery/location5.png" alt="">-->
+<!--                    </div>-->
+<!--                    <div class="location-details">-->
+<!--                        <p>Java for Beginners</p>-->
+<!--                        <a href="#" class="location-btn">Learn Now for Free!</a>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                <div class="single-location mb-30">-->
+<!--                    <div class="location-img">-->
+<!--                        <img src="assets/img/gallery/location6.png" alt="">-->
+<!--                    </div>-->
+<!--                    <div class="location-details">-->
+<!--                        <p>Java for Pros</p>-->
+<!--                        <a href="#" class="location-btn">Learn Now for Free!</a>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; More Btn &ndash;&gt;-->
+<!--        <div class="row justify-content-center">-->
+<!--            <div class="room-btn pt-20">-->
+<!--                <a href="#" class="location-btn">Learn Now for Free!</a>-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+    </div>
+</div>
+<!-- Popular Locations End -->
