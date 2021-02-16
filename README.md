@@ -1,3 +1,5 @@
 # Dannycademy
 
-a site that teaches people how to code. 100% free!
+a site that is focused on teaching how to code for free! For more information:
+
+check out our website: https://www.dannycademy.org/
